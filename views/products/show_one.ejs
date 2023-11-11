@@ -1,0 +1,35 @@
+<form action="../products/">
+    <label for="nom">Nom enregistré (id: <%= product.id %>) : </label>
+    <input type="text" value="<%= product.nom %>" name="nom">
+
+    <button onclick="updateRequest()">
+        Sauvegarder
+    </button>
+    <button onclick="deleteRequest()" >
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</form>
+
+
+<script>
+    function deleteRequest(){
+        $.ajax({
+            url: '../products/<%= product.id %>',
+            type: 'DELETE',
+            success: function(result) {
+                console.log("Element supprimé!")
+            }
+        });
+    }
+
+    function updateRequest(){
+        $.ajax({
+            url: '../products/<%= product.id %>',
+            type: 'PUT',
+            data: {nom:"Voiture"},
+            success: function() {
+                console.log("Element modifié!");
+            }
+        });
+    }
+</script>
